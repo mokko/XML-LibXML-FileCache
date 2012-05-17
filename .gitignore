@@ -1,0 +1,13 @@
+t/testCache
+.project
+.#*
+*~
+blib
+Makefile
+Makefile.old
+devel-test
+pm_to_blib
+db
+*.stackdump
+XML-*
+bak/*
