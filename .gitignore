@@ -11,3 +11,5 @@ db
 *.stackdump
 XML-*
 bak/*
+MYMETA.json
+MYMETA.yml

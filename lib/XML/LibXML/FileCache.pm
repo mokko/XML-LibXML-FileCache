@@ -4,9 +4,9 @@ package XML::LibXML::FileCache;
 
 =head1 DESCRIPTION
 
-A simple file cache based on CHI for small web documents. Cache is populated 
-when document is first accessed (get) or everytime when document is accessed 
-(getFallback).
+A simple file cache for LibXML documents based on CHI for small web documents. 
+Cache is populated when document is first accessed (get) or everytime when 
+document is accessed (getFallback).
 
 =func my $cache=new My::FileCache(cacheDir=>'path/to/dir');
 
@@ -192,19 +192,23 @@ sub _saveInCache {
 	$self->{cache}->set( $key, $str, 'never' ) or die "Can't save in Cache!";
 }
 
+=head1 DEVELOPMENT
+L<https://github.com/mokko/XML-LibXML-FileCache>
+
 =head1 BACKGROUND
 
 Sometimes on my development system, I don't have access to the internet, so I 
-can't validate against xsd on the web. Annoying. This is the use case for 
-which I wrote this little thing. 
+can't validate against xsd files on the web. Annoying! So I invented this 
+little cache. 
 
 =head1 SEE ALSO
 
-XML::LibXML::Cache
+L<XML::LibXML::Cache>
+L<CHI>
 
 =head1 TODO
 
-* separate out as its own module.
+=for :list
 * write more tests
 * check if $url is in fact a valid URI
 
