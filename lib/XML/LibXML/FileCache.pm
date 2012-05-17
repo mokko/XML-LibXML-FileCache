@@ -1,4 +1,7 @@
 package XML::LibXML::FileCache;
+{
+  $XML::LibXML::FileCache::VERSION = '0.001';
+}
 # ABSTRACT: A simple file cache for LibXML (CHI-based)
 use strict;
 use warnings;
@@ -8,23 +11,6 @@ use XML::LibXML;
 use Digest::MD5 qw(md5_hex);
 
 
-=head1 DESCRIPTION
-
-A simple file cache for LibXML documents based on CHI for small web documents. 
-Cache is populated when document is first accessed (get) or everytime when 
-document is accessed (getFallback).
-
-=func my $cache=new My::FileCache(cacheDir=>'path/to/dir');
-
-Options
-cacheDir (required): directory in which cached files are stored
- 	cacheDir is not created automatically. Make sure that dir exists!
-
-expire (optional): TODO
-	not yet implemented
-	expire can be empty, integer (seconds) and 'never'.
-
-=cut
 
 
 has cacheDir => (
@@ -51,11 +37,6 @@ sub BUILD {
 	);
 }
 
-=func my $dom=get ('http://URL.com');
-
-Try cache first. If it fails, try live (web). If all fails, return undef. 
-
-=cut
 
 sub get {
 	my $self = shift;
@@ -81,11 +62,6 @@ sub get {
 	return $dom;
 }
 
-=func my $file=getFromCache ($url);
-
-Get a file from the cache or return nothing.
-
-=cut
 
 sub getFromCache {
 	my $self = shift;
@@ -105,12 +81,6 @@ sub getFromCache {
 
 }
 
-=func  $cache->remove ([$url]);
-	
-	TODO: should remove complete cache if no argument given.
-	Return value 1 for successful removal 0 for no removal.
-
-=cut
 
 sub remove {
 	my $self = shift;
@@ -127,14 +97,6 @@ sub remove {
 
 }
 
-=func my $dom=$cache->getFallback ('http://URL.com');
-
-Check live for url first on the web. If document not live, take it from cache. Return undef if all
-fails.
-
-UNTESTED.
-
-=cut
 
 sub getFallback {
 	my $self = shift;
@@ -192,6 +154,59 @@ sub _saveInCache {
 	$self->{cache}->set( $key, $str, 'never' ) or die "Can't save in Cache!";
 }
 
+
+__PACKAGE__->meta->make_immutable;
+
+1;
+__END__
+=pod
+
+=head1 NAME
+
+XML::LibXML::FileCache - A simple file cache for LibXML (CHI-based)
+
+=head1 VERSION
+
+version 0.001
+
+=head1 DESCRIPTION
+
+A simple file cache for LibXML documents based on CHI for small web documents. 
+Cache is populated when document is first accessed (get) or everytime when 
+document is accessed (getFallback).
+
+=head1 FUNCTIONS
+
+=head2 my $cache=new My::FileCache(cacheDir=>'path/to/dir');
+
+Options
+cacheDir (required): directory in which cached files are stored
+ 	cacheDir is not created automatically. Make sure that dir exists!
+
+expire (optional): TODO
+	not yet implemented
+	expire can be empty, integer (seconds) and 'never'.
+
+=head2 my $dom=get ('http://URL.com');
+
+Try cache first. If it fails, try live (web). If all fails, return undef. 
+
+=head2 my $file=getFromCache ($url);
+
+Get a file from the cache or return nothing.
+
+=head2 $cache->remove ([$url]);
+
+	TODO: should remove complete cache if no argument given.
+	Return value 1 for successful removal 0 for no removal.
+
+=head2 my $dom=$cache->getFallback ('http://URL.com');
+
+Check live for url first on the web. If document not live, take it from cache. Return undef if all
+fails.
+
+UNTESTED.
+
 =head1 DEVELOPMENT
 L<https://github.com/mokko/XML-LibXML-FileCache>
 
@@ -208,12 +223,28 @@ L<CHI>
 
 =head1 TODO
 
-=for :list
-* write more tests
-* check if $url is in fact a valid URI
+=over 4
+
+=item *
+
+write more tests
+
+=item *
+
+check if $url is in fact a valid URI
+
+=back
+
+=head1 AUTHOR
+
+Maurice Mengel <mauricemengel@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2012 by Maurice Mengel.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
 
-__PACKAGE__->meta->make_immutable;
-
-1;

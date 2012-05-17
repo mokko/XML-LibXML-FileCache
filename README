@@ -1,0 +1,60 @@
+NAME
+    XML::LibXML::FileCache - A simple file cache for LibXML (CHI-based)
+
+VERSION
+    version 0.001
+
+DESCRIPTION
+    A simple file cache for LibXML documents based on CHI for small web
+    documents. Cache is populated when document is first accessed (get) or
+    everytime when document is accessed (getFallback).
+
+FUNCTIONS
+  my $cache=new My::FileCache(cacheDir=>'path/to/dir');
+    Options cacheDir (required): directory in which cached files are stored
+    cacheDir is not created automatically. Make sure that dir exists!
+
+    expire (optional): TODO not yet implemented expire can be empty, integer
+    (seconds) and 'never'.
+
+  my $dom=get ('http://URL.com');
+    Try cache first. If it fails, try live (web). If all fails, return
+    undef.
+
+  my $file=getFromCache ($url);
+    Get a file from the cache or return nothing.
+
+  $cache->remove ([$url]);
+            TODO: should remove complete cache if no argument given.
+            Return value 1 for successful removal 0 for no removal.
+
+  my $dom=$cache->getFallback ('http://URL.com');
+    Check live for url first on the web. If document not live, take it from
+    cache. Return undef if all fails.
+
+    UNTESTED.
+
+DEVELOPMENT
+<https://github.com/mokko/XML-LibXML-FileCache>
+BACKGROUND
+    Sometimes on my development system, I don't have access to the internet,
+    so I can't validate against xsd files on the web. Annoying! So I
+    invented this little cache.
+
+SEE ALSO
+    XML::LibXML::Cache CHI
+
+TODO
+    *   write more tests
+
+    *   check if $url is in fact a valid URI
+
+AUTHOR
+    Maurice Mengel <mauricemengel@gmail.com>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2012 by Maurice Mengel.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+

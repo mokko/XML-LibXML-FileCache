@@ -1,0 +1,17 @@
+INSTALL
+LICENSE
+MANIFEST
+META.json
+META.yml
+Makefile.PL
+README
+lib/XML/LibXML/FileCache.pm
+t/00-load.t
+t/10-new.t
+t/20-remove.t
+t/21-get.t
+t/release-pod-coverage.t
+t/release-pod-syntax.t
+t/release-test-version.t
+t/testCache/Default/b/1/b1ac6f5f9515d5fef34186b82d361868.dat
+weaver.ini
