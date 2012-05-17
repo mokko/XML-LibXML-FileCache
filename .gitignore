@@ -5,6 +5,7 @@ t/testCache
 blib
 Makefile
 Makefile.old
+Makefile.PL
 devel-test
 pm_to_blib
 db

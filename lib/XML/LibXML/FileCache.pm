@@ -1,6 +1,12 @@
 package XML::LibXML::FileCache;
-
 # ABSTRACT: A simple file cache for LibXML (CHI-based)
+use strict;
+use warnings;
+use Moose;
+use CHI;
+use XML::LibXML;
+use Digest::MD5 qw(md5_hex);
+
 
 =head1 DESCRIPTION
 
@@ -20,12 +26,6 @@ expire (optional): TODO
 
 =cut
 
-use strict;
-use warnings;
-use Moose;
-use CHI;
-use XML::LibXML;
-use Digest::MD5 qw(md5_hex);
 
 has cacheDir => (
 	is       => 'ro',
@@ -215,4 +215,5 @@ L<CHI>
 =cut
 
 __PACKAGE__->meta->make_immutable;
+
 1;
